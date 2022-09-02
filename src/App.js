@@ -56,7 +56,7 @@ function App() {
     //   console.log("start camera")
     // })
 
-    console.log(AcuantCamera.isCameraSupported ,"AcuantCamera.isCameraSupported")
+    alert(AcuantCamera.isCameraSupported)
     if(AcuantCamera.isCameraSupported){
     AcuantCameraUI.start(
         cameraCallback, //shown above
