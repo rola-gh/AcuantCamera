@@ -98,6 +98,7 @@ function App() {
     },
     onFrameAvailable: function(response) {
       console.log(response ,"res")
+      alert(JSON.stringify(response))
       //this is optional
       //Use only if you plan to display custom UI elements in addition to what is already displayed by the camera.
       // response = {
@@ -131,7 +132,7 @@ function App() {
           Learn React
         </a>
         <button onClick={capture}>capture</button>
-        {/*<div id="acuant-camera"></div>*/}
+        <div id="acuant-camera"></div>
 
 
       </header>
