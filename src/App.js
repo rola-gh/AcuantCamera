@@ -53,7 +53,11 @@ function App() {
     if(AcuantCamera.isCameraSupported){
     AcuantCameraUI.start(
         cameraCallback, //shown above
-        (error, code) => {console.log(error ,"err")}, //error will be more specific, while the code broader. See current list of codes below. Please handle different or null codes, though they are not expected to occur.
+        (error, code) => {
+          console.log(error ,"err", code)
+          alert(`${JSON.stringify(error)} + error + \ + ${JSON.stringify(code)} + code `)
+
+        }, //error will be more specific, while the code broader. See current list of codes below. Please handle different or null codes, though they are not expected to occur.
         options //shown above
     )}
     else{
@@ -80,18 +84,27 @@ function App() {
       //document captured
       //this is not the final result of processed image
       //show a loading screen until onCropped is called
+      console.log(response,'onCaptured' )
+      alert(`${JSON.stringify(response)} + onCaptured `)
+
     },
     onCropped: function(response) {
       if (response) {
+        console.log(response,'onCropped' )
+        alert(`${JSON.stringify(response)} + onCropped `)
+
         //use response
       } else {
+        alert(`error response`)
+
         //cropping error
         //restart capture
       }
     },
     onFrameAvailable: function(response) {
-      console.log(response ,"res")
-      alert(JSON.stringify(response))
+      console.log(response ,"onFrameAvailable")
+      alert(`${JSON.stringify(response)} + onFrameAvailable `)
+
     }
   }
   return (
@@ -100,7 +113,7 @@ function App() {
 
         <button onClick={capture}>capture</button>
         <div id="acuant-camera"></div>
-        
+
       </header>
     </div>
   );
