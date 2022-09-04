@@ -51,6 +51,7 @@ function App() {
 
     alert(AcuantCamera.isCameraSupported)
     if(AcuantCamera.isCameraSupported){
+      alert(`${options.text?.TAP_TO_CAPTURE} = TAP_TO_CAPTURE`)
     AcuantCameraUI.start(
         cameraCallback, //shown above
         (error, code) => {
