@@ -21,13 +21,6 @@ function App() {
       0 //set to 1 if hosting via cdn, defaults to 0
   );
 
-
-
-
-
-
-
-
   },200)
   let workerCallback = () => {console.log("workerCallback")} //no params, void function, called when workers are ready.
 
@@ -99,42 +92,15 @@ function App() {
     onFrameAvailable: function(response) {
       console.log(response ,"res")
       alert(JSON.stringify(response))
-      //this is optional
-      //Use only if you plan to display custom UI elements in addition to what is already displayed by the camera.
-      // response = {
-      //   type: Number,
-      //   dimensions: Object,
-      //   dpi: Number,
-      //   isCorrectAspectRatio: Boolean,
-      //   points: Array,
-      //   state: Number => {
-      //     NO_DOCUMENT: 0,
-      //         SMALL_DOCUMENT: 1,
-      //         BIG_DOCUMENT: 2,
-      //         GOOD_DOCUMENT: 3
-      //   }
-      // }
     }
   }
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+
         <button onClick={capture}>capture</button>
         <div id="acuant-camera"></div>
-
-
+        
       </header>
     </div>
   );
