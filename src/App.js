@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import {useState} from 'react'
 import useScript from './hooks/useScript';
 
 function App() {
@@ -8,7 +9,7 @@ function App() {
   useScript('AcuantPassiveLiveness.min.js');
   useScript('opencv.min.js');
 
-
+  const [cameraIsOpen, setCameraIsOpen] = useState(false)
   setTimeout(()=>{
     if(window.loadAcuantSdk) window.loadAcuantSdk()
 
@@ -40,6 +41,7 @@ function App() {
   }
 
   const capture =()=>{
+    setCameraIsOpen(!cameraIsOpen)
     // AcuantCamera.start(
     //     (response) => {console.log(response ,"res")}, //detect callback (see onFrameAvalible in part 3 of AcauntCameraUI for response body)
     //     (error, code) => {console.log(error,code,"camera")} //error callback (see part 4 of AcuantCameraUI)
@@ -56,7 +58,7 @@ function App() {
         cameraCallback, //shown above
         (error, code) => {
           console.log(error ,"err", code)
-          alert(`${JSON.stringify(error)} + error + \ + ${JSON.stringify(code)} + code `)
+          alert(`${JSON.stringify(error)} + error + ${JSON.stringify(code)} + code `)
 
         }, //error will be more specific, while the code broader. See current list of codes below. Please handle different or null codes, though they are not expected to occur.
         options //shown above
@@ -110,12 +112,12 @@ function App() {
   }
   return (
     <div className="App">
-      <header className="App-header">
-
-        <button onClick={capture}>capture</button>
-        <div id="acuant-camera"></div>
-
-      </header>
+      {!cameraIsOpen&&
+          <header className="App-header">
+            <button onClick={capture}>capture</button>
+          </header>
+      }
+          <div id="acuant-camera"></div>
     </div>
   );
 }
