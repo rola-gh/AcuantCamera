@@ -62,7 +62,7 @@ function App() {
           alert(`${JSON.stringify(error)} + error + ${JSON.stringify(code)} + code `)
 
         }, //error will be more specific, while the code broader. See current list of codes below. Please handle different or null codes, though they are not expected to occur.
-        options //shown above
+       // options //shown above
     )}
     else{
       alert("manual")
@@ -78,8 +78,8 @@ function App() {
     text:{
       NONE: "ALIGN",
       SMALL_DOCUMENT: "MOVE CLOSER",
+      GOOD_DOCUMENT: null,//null countdown
       BIG_DOCUMENT: "TOO CLOSE",
-      GOOD_DOCUMENT: null,//if let null will show a countdown
       CAPTURING: "CAPTURING",
       TAP_TO_CAPTURE: "TAP TO CAPTURE"
     }
