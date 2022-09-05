@@ -1117,7 +1117,8 @@ const AcuantCamera = (function () {
         if (waitingOnTheOther) {
           waitingOnTheOther = false;
         } else {
-          finishCrop(result, capType, callback);
+          console.log("finishCrop" ,result ,imgData, width, height)
+          finishCrop({image:imgData,width, height}, capType, callback);
         }
       },
       onFail: function () {
@@ -1152,6 +1153,7 @@ const AcuantCamera = (function () {
 
   function finishCrop(result, capType, callback) {
 
+    console.log(result ,"result")
     async function handleMetrics (sharpness, glare) {
       result.sharpness = sharpness;
       result.glare = glare;

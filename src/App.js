@@ -10,6 +10,8 @@ function App() {
   useScript('opencv.min.js');
 
   const [cameraIsOpen, setCameraIsOpen] = useState(false)
+  const [image, setImage] = useState(null)
+  const [imageData, setImageData] = useState({})
   setTimeout(()=>{
     if(window.loadAcuantSdk) window.loadAcuantSdk()
 
@@ -50,11 +52,10 @@ function App() {
     // acuantCamera.addEventListener('acuantcameracreated', ()=>{
     //   console.log("start camera")
     // })
-
+    //
     alert(AcuantCamera.isCameraSupported)
     if(AcuantCamera.isCameraSupported){
-      alert(`${options.text?.TAP_TO_CAPTURE} = TAP_TO_CAPTURE`)
-    AcuantCameraUI.start(
+      AcuantCameraUI.start(
         cameraCallback, //shown above
         (error, code) => {
           console.log(error ,"err", code)
@@ -64,8 +65,9 @@ function App() {
         options //shown above
     )}
     else{
+      alert("manual")
       startManualCapture()
-    }
+     }
   }
 
   const startManualCapture=()=> {
@@ -82,15 +84,33 @@ function App() {
       TAP_TO_CAPTURE: "TAP TO CAPTURE"
     }
   };
+
+  let evaluateImageCallback = (response) => {console.log(response ,"evaluate")}
+
+
   var cameraCallback = {
     onCaptured: function(response) {
       //document captured
       //this is not the final result of processed image
       //show a loading screen until onCropped is called
       console.log(response,'onCaptured' )
+      setImage(response?.data)
       alert(`${JSON.stringify(response)} + onCaptured `)
+      setImageData(response)
+
+
+      //       imgData: Object, //received from trigger capture
+    //       width: Number, //received from trigger capture
+    //       height: Number, //received from trigger capture
+    //       capType: String, //Used for metrics on how the image was captured, put "CUSTOM" or leave blank for best results
+    //       callback: Function //shown below
+    // )
+
+
+
 
     },
+
     onCropped: function(response) {
       if (response) {
         console.log(response,'onCropped' )
@@ -98,7 +118,9 @@ function App() {
 
         //use response
       } else {
-        alert(`error response`)
+        alert(`error onCropped`)
+        console.log(imageData ,"imageData")
+        AcuantCamera.evaluateImage(imageData.data,imageData.width,imageData.height,'',evaluateImageCallback)
 
         //cropping error
         //restart capture
@@ -117,7 +139,7 @@ function App() {
             <button onClick={capture}>capture</button>
           </header>
       }
-          <div id="acuant-camera"></div>
+        <div id="acuant-camera"></div>
     </div>
   );
 }
