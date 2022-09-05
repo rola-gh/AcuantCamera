@@ -128,7 +128,7 @@ function App() {
     },
     onFrameAvailable: function(response) {
       console.log(response ,"onFrameAvailable")
-      alert(`${JSON.stringify(response)} + onFrameAvailable `)
+     //    alert(`${JSON.stringify(response)} + onFrameAvailable `)
 
     }
   }
